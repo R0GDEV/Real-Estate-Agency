@@ -17,6 +17,13 @@ Node.js (v14.x or later)
 npm or yarn
 MongoDB (or any other database you're using)
 Postman (optional, for API testing)
+
+![image](https://github.com/user-attachments/assets/69c214fb-a28e-4c06-8f9c-fcb03451f125)
+![image](https://github.com/user-attachments/assets/f7eaba5e-996f-4c95-8a23-25e82a260099)
+![image](https://github.com/user-attachments/assets/cf0a945e-1fd3-482a-9a3a-9fe923fa536d)
+
+
+
 <H1>Installation</H1>
 
 Clone the repository:

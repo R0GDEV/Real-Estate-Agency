@@ -42,7 +42,7 @@ import { MongoClient, ServerApiVersion, ObjectId } from 'mongodb';
 
 // Enable CORS for all origins
 const uri = process.env.MONGO_URI || '';
-console.log(uri);
+//console.log(uri);
 const client = new MongoClient(uri, {
 
   serverApi: {
@@ -54,21 +54,21 @@ const client = new MongoClient(uri, {
 async function connectToMongoDB() {
   try {
     await client.connect();
-    console.log('Connected to MongoDB');
-    
+    //console.log('Connected to MongoDB');
+
     // You can perform operations here, or pass `client` to routes to work with collections
 
   } catch (error) {
     console.error('Failed to connect to MongoDB', error);
     process.exit(1); // Exit the application if connection fails
-  }finally{
+  } finally {
     await client.close();
-    console.log('Diconnected to MongoDB');
+    //console.log('Diconnected to MongoDB');
   }
 }
 
 // Example of calling MongoDB connection
-connectToMongoDB();
+//connectToMongoDB();
 
 interface Property {
   id: string;
@@ -88,42 +88,9 @@ app.use(express.json()); // Middleware to parse JSON requests
 app.use(cors());
 
 
-/*
-const uri = process.env.MONGO_URI || '';
-const client = new MongoClient(uri);
 
-// Route to delete a property (or "Notice") by ID
-app.delete('/api/properties/:id', async (req: Request, res: Response) => {
-  try {
-    const { id } = req.params;
-    await client.connect(); // Connect to MongoDB
-
-    const db = client.db('DATA_COLLECTION'); // Your database name
-    const collection = db.collection('Notice'); // Your collection name
-
-    // Delete the document with the provided ID
-    const result = await collection.deleteOne({ _id: new ObjectId(id) });
-
-    if (result.deletedCount === 1) {
-      res.status(200).send('Notice deleted successfully');
-    } else {
-      res.status(404).send('Notice not found');
-    }
-  } catch (error) {
-    console.error('Error deleting Notice:', error);
-    res.status(500).send('Internal Server Error');
-  } finally {
-    await client.close(); // Close the connection to MongoDB
-  }
-});
-*/
-const authenticateJWT1 = (req: Request, res: Response, next: NextFunction) => {
-
-  next();
-
-};
 app.post('/api/properties', async (req: Request, res: Response) => {
-  const {  title, description, price, location, bedrooms, bathrooms,token } = req.body;
+  const { title, description, price, location, bedrooms, bathrooms, token } = req.body;
   if (!token) {
     return res.status(401).json({ message: 'Authentication token missing' });
   }
@@ -139,12 +106,12 @@ app.post('/api/properties', async (req: Request, res: Response) => {
       owner: decoded.email,      // Property owner's email (extracted from JWT)
       interestedClients: [],     // Array to store interested client emails
     };
-    
+
     await client.connect();
     const db = client.db('DATA_COLLECTION');
     const collection = db.collection('Properties');
     await collection.insertOne(data);
-    console.log(data);
+    //console.log(data);
     res.status(201).json({ message: 'Property created successfully' });
   } catch (error) {
     res.status(500).json({ message: 'Server error', error });
@@ -165,32 +132,7 @@ const generateToken = (email: string) => {
 };
 
 // Register Route
-app.post('/api/register', async (req: Request, res: Response) => {
-  console.log(req.body);
-  const { name, email, password } = req.body;
 
-  // Check if the user already exists
-  const userExists = users.find(user => user.email === email);
-  if (userExists) {
-    return res.status(400).json({ message: 'User already exists' });
-  }
-
-  // Hash the password
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(password, salt);
-
-  // Create a new user and store in-memory (or in a real database)
-  const newUser = { id: users.length + 1, name, email, password: hashedPassword };
-  users.push(newUser);
-
-  // Return user info along with a JWT token
-  res.status(201).json({
-    id: newUser.id,
-    name: newUser.name,
-    email: newUser.email,
-    token: generateToken(newUser.email),
-  });
-});
 
 
 app.get('/api/properties', async (req: Request, res: Response) => {
@@ -200,12 +142,12 @@ app.get('/api/properties', async (req: Request, res: Response) => {
     const collection = db.collection('Properties');
     const cursor = collection.find();
     const Properties = await cursor.toArray();
-    console.log(Properties);
+    ////console.log(Properties);
     res.json(Properties);
   } finally {
     await client.close();
   }
-  
+
 });
 
 app.get('/api/properties/myinterest', async (req: Request, res: Response) => {
@@ -213,35 +155,109 @@ app.get('/api/properties/myinterest', async (req: Request, res: Response) => {
 
 });
 app.post('/api/properties/myproperties', async (req: Request, res: Response) => {
- const {token}=req.body;
- if (!token) {
-  return res.status(401).json({ message: 'Authentication token missing' });
-}
-try {
-  const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your_jwt_secret') as { email: string };
-  await client.connect();
-  const db = client.db('DATA_COLLECTION');
-  const collection = db.collection('Properties');
-  const cursor = collection.find({owner:decoded.email });
-  const Properties = await cursor.toArray();
- // console.log(Properties);
+  const { token } = req.body;
+  if (!token) {
+    return res.status(401).json({ message: 'Authentication token missing' });
+  }
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your_jwt_secret') as { email: string };
+    //console.log(decoded);
+    await client.connect();
+    const db = client.db('DATA_COLLECTION');
+    const collection = db.collection('Properties');
+    const cursor = collection.find({ owner: decoded.email });
+    const Properties = await cursor.toArray();
+    ////console.log(cursor);
     res.json(Properties);
-} catch (error) {
-  res.status(500).json({ message: 'Server error', error });
-}
-finally {
-  await client.close();
-}
- 
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error });
+  }
+  finally {
+    await client.close();
+  }
+
 
 });
+app.post('/api/properties/:id/interest', async (req: Request, res: Response) => {
+  const { id } = req.params; // Property ID from URL
+  const { token } = req.body; // Interested client's email from request body
 
-async function find(id:string) {
+  if (!token) {
+    return res.status(401).json({ message: 'Authentication token missing' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your_jwt_secret') as { email: string };
+    // Connect to MongoDB
+    await client.connect();
+    const db = client.db('DATA_COLLECTION');
+    const collection = db.collection('Properties');
+
+    // Find the property by owner email and property ID
+    const property = await collection.findOne({ _id: new ObjectId(id), owner: token.email });
+    if (!property) {
+      return res.status(404).json({ message: 'Property not found or you do not own this property' });
+    }
+
+    if (property.interestedClients.includes(decoded.email)) {
+      return res.status(400).json({ message: 'Client already showed interest in this property' });
+    }
+    console.log(token, property);
+    // Add the client's email to the interestedClients array
+    const updatedProperty = await collection.updateOne(
+      { _id: new ObjectId(id) }, // Find by property ID
+      { $addToSet: { interestedClients: decoded.email } } // Add email to interestedClients array, avoiding duplicates
+    );
+    // Check if the property was updated
+    if (updatedProperty.modifiedCount === 1) {
+      res.status(200).json({ message: 'Interest registered successfully', property: updatedProperty });
+    } else {
+      res.status(500).json({ message: 'Failed to update the property' });
+    }
+  } catch (error) {
+    console.error('Error updating property:', error);
+    res.status(500).json({ message: 'Server error' });
+  } finally {
+    await client.close(); // Ensure the connection to MongoDB is closed
+  }
+});
+app.delete('/api/properties/:id', async (req: Request, res: Response) => {
+  const { id } = req.params; // Get property ID from the URL
+   // Assuming you have decoded the JWT and can extract the user
+
   try {
     await client.connect();
     const db = client.db('DATA_COLLECTION');
     const collection = db.collection('Properties');
-    const cursor = collection.find({_id: new ObjectId(id)});
+
+    // Check if the property belongs to the owner (JWT check for property ownership)
+    const property = await collection.findOne({ _id: new ObjectId(id)});
+
+    if (!property) {
+      return res.status(404).json({ message: 'Property not found or you do not own this property' });
+    }
+
+    // Delete the property
+    const result = await collection.deleteOne({ _id: new ObjectId(id) });
+
+    if (result.deletedCount === 1) {
+      res.status(200).json({ message: 'Property deleted successfully' });
+    } else {
+      res.status(500).json({ message: 'Failed to delete the property' });
+    }
+  } catch (error) {
+    console.error('Error deleting property:', error);
+    res.status(500).json({ message: 'Server error' });
+  } finally {
+    await client.close(); // Ensure the MongoDB connection is closed
+  }
+});
+async function find(id: string) {
+  try {
+    await client.connect();
+    const db = client.db('DATA_COLLECTION');
+    const collection = db.collection('Properties');
+    const cursor = collection.find({ _id: new ObjectId(id) });
     const Properties = await cursor.toArray();
     return Properties;
   } finally {
@@ -250,73 +266,100 @@ async function find(id:string) {
 }
 
 
-app.get('/api/properties/:id', async(req: Request, res: Response) => {
+app.get('/api/properties/:id', async (req: Request, res: Response) => {
 
   const { id } = req.params;
-  const property =await find(id);
-  
+  const property = await find(id);
+
   if (property) {
     res.json(property);
   } else {
     res.status(404).json({ message: 'Property not found' });
   }
-  console.log(property);
+  //console.log(property);
 });
-/*
-app.post('/api/properties', async (req, res) => {
-  try {
-    const { description } = req.body;
-    const notice = {
-      description,
-      date
-    };
-    await insertNotice(notice);
-    res.redirect("/notices");
-  } catch (error) {
-    console.error('Error inserting notice:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+
+app.post('/api/register', async (req: Request, res: Response) => {
+  //console.log(req.body);
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({ message: 'Email and password are required.' });
   }
-});
 
-app.delete('/api/properties/:id', async (req, res) => {
+  // Check if the user already exists
+  const userExists = users.find(user => user.email === email);
+  if (userExists) {
+    return res.status(400).json({ message: 'User already exists' });
+  }
   try {
-
-    const { id } = req.params;
     await client.connect();
     const db = client.db('DATA_COLLECTION');
-    const collection = db.collection('Notice');
-    const result = await collection.deleteOne({ _id: new ObjectId(id) });
-    if (result.deletedCount === 1) {
-      res.status(200).send('Notice deleted successfully');
-    } else {
-      res.status(404).send('Notice not found');
+    const collection = db.collection('User');
+    // Check if user already exists
+    const existingUser = await collection.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: 'User already exists.' });
     }
+
+    // Hash the password
+
+
+    // Hash the password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    // Create a new user and store in-memory (or in a real database)
+    const newUser = { email, password: hashedPassword };
+    const user = await collection.insertOne(newUser);
+    // Return user info along with a JWT token
+    res.status(201).json({
+      email: newUser.email,
+      token: generateToken(newUser.email),
+    });
+
   } catch (error) {
-    console.error(error);
-    res.status(500).send('Internal Server Error');
+    console.error('Error registering user:', error);
+    res.status(500).json({ message: 'Server error.' });
+  } finally {
+    await client.close();
   }
-});*/
+});
 // Login Route
 app.post('/api/login', async (req: Request, res: Response) => {
-  console.log(req.body);
+  //console.log(req.body);
   const { email, password } = req.body;
-
-  // Check if the user exists
-  const user = users.find(u => u.email === email) || {
-    email: email
-  };
-  if (!user) {
-    return res.status(400).json({ message: 'Invalid email or password' });
+  if (!email || !password) {
+    return res.status(400).json({ message: 'Email and password are required.' });
   }
+  try {
+    await client.connect();
+    const db = client.db('DATA_COLLECTION');
+    const collection = db.collection('User');
+    // Check if user exists
+    const user = await collection.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ message: 'Invalid credentials.' });
+    }
 
+    // Check if password matches
+    const isMatch = await bcrypt.compare(password, user.password);
+    ////console.log(isMatch);
+    ////console.log(user);
+    if (!isMatch) {
+      return res.status(400).json({ message: 'Invalid credentials.' });
+    }
+    // Create a JWT token
+    const token = generateToken(user.email)
+    res.status(200).json({ token, message: 'Login successful!' });
+  } catch (error) {
+    console.error('Error logging in:', error);
+    res.status(500).json({ message: 'Server error.' });
+  }
   // Compare the entered password with the stored hashed password
- 
+
 
   // If login is successful, return the user info and JWT token
-  res.json({
-    email: user.email,
-    token: generateToken(user.email),
-  });
+
 });
 
 // Start the server

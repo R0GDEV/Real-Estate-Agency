@@ -27,7 +27,7 @@ Postman (optional, for API testing)
 <H1>Installation</H1>
 
 Clone the repository:
-git clone https://github.com/your-username/real-estate-backend.git
+git clone https://github.com/R0GDEV/real-estate-backend.git
 
 Navigate to the project directory:
 cd real-estate-backend
@@ -37,7 +37,7 @@ npm install
 
 Configuration
 Create a .env file in the root directory, and add the following environment variables:
-PORT=3000
+PORT=5000
 DB_URI=mongodb://localhost:27017/real-estate-db or //MongoDB Atlas connection string 
 JWT_SECRET=your_secret_key
 
@@ -51,9 +51,9 @@ Run the application:
 npm run dev
 node server.ts
 
-The backend server should now be running on http://localhost:3000.
+The backend server should now be running on http://localhost:5000.
 
-Test API endpoints via Postman or any other API client, using the base URL http://localhost:3000.
+Test API endpoints via Postman or any other API client, using the base URL http://localhost:5000.
 
 <h1>About the Real Estate Agency</h1>
 

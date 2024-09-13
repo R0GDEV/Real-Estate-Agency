@@ -18,10 +18,9 @@ npm or yarn
 MongoDB (or any other database you're using)
 Postman (optional, for API testing)
 <h2>Media</h2>
+
 ![image](https://github.com/user-attachments/assets/541fb0b3-c28b-4168-84d2-f2039e8766fc)
-
 ![image](https://github.com/user-attachments/assets/51d95bd5-8994-4533-bb08-a8011d7c804d)
-
 ![image](https://github.com/user-attachments/assets/d2d69d59-dfb3-449f-9336-cc5460d8944a)
 ![image](https://github.com/user-attachments/assets/a4e88fdc-3341-4568-ac59-3c48ed373bb4)
 ![image](https://github.com/user-attachments/assets/03f81d0e-5276-4636-81f6-7934dc9d11fc)

@@ -30,7 +30,13 @@ async function connectToMongoDB() {
 //connectToMongoDB();
 const app = express();
 app.use(express.json()); // Middleware to parse JSON requests
-app.use(cors());
+//app.use(cors());
+app.get('/', (req: Request, res: Response) => {
+  console.log("Hello");
+  res.send("Hello");
+
+});
+
 
 app.post('/api/properties', async (req: Request, res: Response) => {
   const { title, description, price, location, bedrooms, bathrooms, token } = req.body;

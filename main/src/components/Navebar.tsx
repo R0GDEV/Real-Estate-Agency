@@ -75,8 +75,7 @@ const Navbar = () => {
                 <img onClick={() => setVisible(true)} src={Menu_icon} className="cursor-pointer sm:hidden" alt="" />
             </div>
             <div
-                className={`absolute top-0 right-0 bottom-0 overflow-hidden bg-white transition-all ${visible ? 'w-full' : 'w-0'
-                    }`}
+                  className={`absolute top-0 right-0 bottom-0 bg-white transition-all duration-300 ease-in-out z-50 ${visible ? 'w-full' : 'w-0'}`}
             >
                 <div className="flex flex-col  text-gray-600">
                     <div onClick={() => setVisible(false)} className="flex item-center gap-4 p-3 ">

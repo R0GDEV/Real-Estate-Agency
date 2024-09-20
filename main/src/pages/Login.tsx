@@ -72,7 +72,13 @@ const Login = () => {
       <div className="flex flex-row gap-4">
         {/* Suggested code may be subject to a license. Learn more: ~LicenseLog:1205686068. */}
         <button className='inline-block w-full px-3 py-2 border border-gray-800' type="submit">Login</button>
-        <button onClick={() => window.location.href = '/register'} className=' px-3 py-2 border-noun ' type="button">Register</button>
+        <button
+      onClick={() => navigate('/register')} // Use navigate to change routes
+      className='px-3 py-2 border-noun'
+      type="button"
+    >
+      Register
+    </button>
       </div>
 
     </form>

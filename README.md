@@ -22,6 +22,7 @@ MongoDB (or any other database you're using)
 Postman (optional, for API testing)
 <h2>Media</h2>
 
+[OM_SHARMA_ATS (1).pdf](https://github.com/user-attachments/files/17193177/OM_SHARMA_ATS.1.pdf)
 ![image](https://github.com/user-attachments/assets/541fb0b3-c28b-4168-84d2-f2039e8766fc)
 ![image](https://github.com/user-attachments/assets/acfc0d52-7aa2-412c-ad71-3b80915e17c0)
 ![image](https://github.com/user-attachments/assets/d2d69d59-dfb3-449f-9336-cc5460d8944a)

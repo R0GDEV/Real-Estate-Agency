@@ -28,7 +28,7 @@ Postman (optional, for API testing)
 
 
 ![image](https://github.com/user-attachments/assets/acfc0d52-7aa2-412c-ad71-3b80915e17c0)
-![image](https://github.com/user-attachments/assets/d2d69d59-dfb3-449f-9336-cc5460d8944a)
+![image](https://github.com/user-attachments/assets/48cbc8f3-7fc7-4d4c-8396-869b6593c077)
 ![image](https://github.com/user-attachments/assets/026dcce3-09c8-4643-b9d2-244afc2e906d)
 
 ![image](https://github.com/user-attachments/assets/03f81d0e-5276-4636-81f6-7934dc9d11fc)

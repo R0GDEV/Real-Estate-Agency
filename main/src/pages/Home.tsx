@@ -29,7 +29,7 @@ const Home = () => {
 
           {/* Content Container */}
           <div className="relative px-8 sm:px-16 md:px-24 lg:px-32 text-white ">
-            <p className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">Welcome o Real Estate Agency</p>
+            <p className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">Welcome To Real Estate Agency</p>
             <p className="text-md sm:text-lg mb-6">
               Find your dream home with ease and confidence. We offer the best properties at unbeatable prices!
             </p>

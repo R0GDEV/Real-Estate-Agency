@@ -6,14 +6,51 @@ This **Real Estate Platform** simplifies property management for agents and enha
 ---
 
 ## 📸 Screenshots
+
+### Home Page
+![Home Page](https://github.com/user-attachments/assets/9475895b-2003-4eb9-9e19-0906ba6ca2cf)
+The home page offers a seamless introduction to the platform, featuring a clean UI for easy navigation to various sections like properties, map view, and user accounts.
+
 ### Login Page
-![Login Page](https://via.placeholder.com/800x400)
+![Login Page](https://github.com/user-attachments/assets/60476c37-e451-4a0e-9991-18cfbf98e3f1)
+The login page allows users to securely access the platform using their email and password. It includes JWT-based authentication for secure access.
+
+### Register Page
+![Register Page](https://github.com/user-attachments/assets/fd986b34-502e-44a8-99a8-114ad85908fb)
+
+
+New users can register on the platform by filling in their details such as email, password, and role (Agent or Client). The form validates user input for a smooth registration process.
 
 ### Property Listings
 ![Property Listings](https://via.placeholder.com/800x400)
+This page displays all the available properties. Clients can browse through property listings, and agents can manage their own properties. Filters and sorting options enhance the search experience.
+
+### Property Details
+![Property Details](https://github.com/user-attachments/assets/f2e98545-a82b-4e86-b13b-de62fefc45f5
+)
+The property details page provides comprehensive information about each property, including price, location, bedrooms, and bathrooms. Clients can express interest by clicking the "Show Interest" button.
+
+### Create Property (Agent Role)
+![Create Property](https://via.placeholder.com/800x400)
+Agents can use this form to create new property listings by filling out the title, description, price, location, and other relevant details. Image uploads are supported for better property visualization.
+
+### My Properties (Agent Role)
+![My Properties](https://via.placeholder.com/800x400)
+Agents can view and manage their listed properties. They have the ability to update or delete listings as necessary, with easy-to-use buttons for managing each property.
 
 ### Interested Clients (Agent Role)
 ![Interested Clients](https://via.placeholder.com/800x400)
+Agents can view a list of clients who have expressed interest in their properties, providing them with key contact information for follow-up.
+
+### Map View
+![Map View](https://via.placeholder.com/800x400)
+Clients and agents can explore property locations through the interactive map feature. The map provides a visual representation of property locations, helping clients find homes in their preferred areas.
+
+### Contact Page
+![Contact Page](https://via.placeholder.com/800x400)
+The contact page includes important details like the business address, phone number, and email. Users can reach out to the platform’s support team for queries and assistance.
+
+
 ![image](https://github.com/user-attachments/assets/10d87d9c-9a17-4cd6-9170-65cee5bdc5d8)
 ![image](https://github.com/user-attachments/assets/fbf53dec-1411-4079-8bac-c747fcd2da9d)
 ![image](https://github.com/user-attachments/assets/91d54b6c-9c02-451c-b958-b4327b6c7d87)

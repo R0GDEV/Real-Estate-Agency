@@ -29,7 +29,7 @@ const Home = () => {
 
           {/* Content Container */}
           <div className="relative px-8 sm:px-16 md:px-24 lg:px-32 text-white ">
-            <p className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">Welcome To Real Estate Agency</p>
+            <p className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">Welcome o Real Estate Agency</p>
             <p className="text-md sm:text-lg mb-6">
               Find your dream home with ease and confidence. We offer the best properties at unbeatable prices!
             </p>
@@ -61,12 +61,12 @@ const Home = () => {
           <p className="text-lg mb-8">
             We only partner with trusted developers and property owners, ensuring the highest quality properties in prime locations. Our listings are thoroughly vetted to guarantee that you get exactly what you expect.
           </p>
-          <div className="flex justify-center">
-            <div className="w-1/3 p-4">
+          <div className="flex justify-center flex-col sm:flex-row">
+            <div className="sm:w-1/3 p-4">
               <img src={QC} alt="Quality Properties" className="rounded shadow-lg" />
               <p className="mt-4 text-sm">We ensure top-quality homes, built with the best materials and modern designs.</p>
             </div>
-            <div className="w-1/3 p-4">
+            <div className="sm:w-1/3 p-4">
               <img src={SC} alt="Safety First" className="rounded shadow-lg" />
               <p className="mt-4 text-sm">Your safety is our priority. We ensure all homes meet the highest safety standards.</p>
             </div>

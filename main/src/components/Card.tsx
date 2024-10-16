@@ -1,19 +1,20 @@
-
-import { Link } from 'react-router-dom'
-import B from '../assets/B1.jpg';
+import { Link } from 'react-router-dom';
 import React from 'react';
 
+// You can use a default placeholder image here for when the actual image is not available
+import DefaultImage from '../assets/B1.jpg';
 
 interface CardProps {
   id: string;
   title: string;
   price: number;
   location: string;
+  image: string; // Add image prop to accept Base64 image
   showDeleteButton?: boolean;
   onDelete?: (id: string) => void;
 }
 
-const Card: React.FC<CardProps> = ({ id, title, price, location, showDeleteButton = false, onDelete }) => {
+const Card: React.FC<CardProps> = ({ id, title, price, location, image, showDeleteButton = false, onDelete }) => {
   const handleDeleteClick = (e: React.MouseEvent) => {
     e.stopPropagation(); // Stop the event from propagating to the Link
     onDelete?.(id); // Trigger the delete action
@@ -26,7 +27,7 @@ const Card: React.FC<CardProps> = ({ id, title, price, location, showDeleteButto
         <div className="overflow-hidden">
           <img
             className="object-cover w-full h-40 hover:scale-105 transition-transform duration-500 ease-in-out"
-            src={B} // Replace with property image URL
+            src={image || DefaultImage} // Use Base64 image or placeholder image
             alt={title}
           />
         </div>

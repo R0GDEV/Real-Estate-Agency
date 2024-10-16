@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios, { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -52,7 +52,7 @@ const Login = () => {
         const testAccount = testAccounts.find(
           (account) => account.email === email && account.password === password
         );
-    
+
         if (testAccount) {
           localStorage.setItem('token', 'test-token');
           localStorage.setItem('role', testAccount.role);
@@ -63,11 +63,9 @@ const Login = () => {
           toast.error('Invalid credentials for test accounts.');
         }
       } else if (error instanceof AxiosError) {
-        // If the error has a response, it's from the API
         const errorMessage = error.response?.data?.message || 'Login failed.';
         toast.error(errorMessage);
       } else {
-        // Handle any other unknown error types
         toast.error('An unknown error occurred. Please try again.');
       }
     }
@@ -78,6 +76,8 @@ const Login = () => {
     setPassword(account.password);
     toast.info(`Using ${account.role} Test Account`);
   };
+
+
 
   return (
     <div className="relative flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-800 via-purple-700 to-indigo-900 p-4">
@@ -95,6 +95,9 @@ const Login = () => {
           ></path>
         </svg>
       </div>
+
+      {/* Modal */}
+  
 
       {/* Form Container */}
       <div className="relative z-10 bg-white shadow-lg rounded-lg p-8 max-w-lg w-full transition-all duration-500 hover:shadow-xl hover:scale-105">
@@ -156,8 +159,7 @@ const Login = () => {
         </div>
       </div>
 
-      {/* Error and Success Messages */}
-      <ToastContainer  className='mt-16' position="top-right" autoClose={3000} newestOnTop={true} theme="dark" hideProgressBar={false}  closeOnClick  pauseOnHover={false} />
+      <ToastContainer />
     </div>
   );
 };

@@ -12,6 +12,7 @@ function Interested() {
         title: string;
         description: string;
         price: any;
+        image: string | null; // Allow image to be null initially
         location: string;
     }
 
@@ -63,6 +64,7 @@ function Interested() {
                                     title={property.title}
                                     price={property.price}
                                     location={property.location}
+                                    image={property.image || ''} // Pass the image or empty string if null
                                     showDeleteButton={false}
                                     onDelete={() => {}} // Pass a no-op function
                                 />

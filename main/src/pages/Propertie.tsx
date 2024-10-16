@@ -1,8 +1,6 @@
-
 import { useEffect, useState } from 'react';
 import Card from '../components/Card';
 import Title from '../components/Title';
-//import React from 'react';
 import axios from 'axios';
 import { propertiesData } from '../components/StaticData';
 import { ToastContainer, toast } from 'react-toastify';
@@ -15,14 +13,15 @@ const Propertie = () => {
     description: string;
     price: number;
     location: string;
+    image: string | null; // Allow image to be null initially
   }
+  
   const [showFilter, setShowfilter] = useState(false);
-  // const [filterProducts, setfilter] = useState([]);
-
   const [properties, setProperties] = useState<Property[]>([]);
   const [filteredProperties, setFilteredProperties] = useState<Property[]>([]);
   const [selectedLocations, setSelectedLocations] = useState<string[]>([]);
-  const [locationFilter] = useState('');
+  const [imageError, setImageError] = useState<string>(''); // State for image error message
+
   useEffect(() => {
     const fetchProperties = async () => {
       try {
@@ -35,32 +34,30 @@ const Propertie = () => {
         if (response.data && response.data.length > 0) {
           setProperties(response.data); // Use API data
           setFilteredProperties(response.data);
+          
+          // Validate image data
+          const invalidImageProperties = response.data.filter((property: Property) => !property.image);
+          if (invalidImageProperties.length > 0) {
+            setImageError('Some properties are missing image data.');
+            toast.error('Some properties are missing image data.'); // Notify user
+          } else {
+            setImageError(''); // Reset error if all images are valid
+          }
+
         } else {
           setProperties(propertiesData); // Fallback to static data
           setFilteredProperties(propertiesData);
         }
       } catch (error) {
         console.error('Error fetching properties:', error);
-        // Fallback to static data if API request fails
-        setProperties(propertiesData);
+        setProperties(propertiesData); // Fallback to static data if API request fails
         setFilteredProperties(propertiesData);
-        // Show toast notification on error
         toast.error('Failed to fetch properties from the backend. Showing static data.');
       }
     };
 
     fetchProperties();
   }, []);
-  useEffect(() => {
-    if (locationFilter === '') {
-      setFilteredProperties(properties); // Show all properties if no filter is selected
-    } else {
-      const filtered = properties.filter((property) =>
-        property.location.toLowerCase().includes(locationFilter.toLowerCase())
-      );
-      setFilteredProperties(filtered); // Update filtered properties
-    }
-  }, [locationFilter, properties]);
 
   // Handle checkbox change
   const handleLocationChange = (location: string) => {
@@ -84,16 +81,18 @@ const Propertie = () => {
   }, [selectedLocations, properties]);
 
   const uniqueLocations = Array.from(new Set(properties.map(property => property.location)));
+
   return (
     <div className='px-4'>
-     <ToastContainer  className='mt-16' position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={true} closeOnClick  pauseOnHover={false} />
+      <ToastContainer className='mt-16' position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={true} closeOnClick pauseOnHover={false} />
       <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t'>
         <div className='min-w-60'>
           <p onClick={() => setShowfilter(!showFilter)} className='my-2 text-xl flex items-center'>
-            FILTER</p>
+            FILTER
+          </p>
           <div className={`border border-gray-300 pl-5 py-3 mt-6 ${showFilter ? '' : 'hidden'} sm:block`}>
-            < p className='mb-3 text-sm font-medium'>Location</p>
-            <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
+            <p className='mb-3 text-lg font-medium'>Location</p>
+            <div className='flex flex-col items-start gap-2 text-sm font-light text-gray-700'>
               {uniqueLocations.map(location => (
                 <div key={location}>
                   <p className='flex gap-2'>
@@ -108,18 +107,16 @@ const Propertie = () => {
                   </p>
                 </div>
               ))}
-
             </div>
           </div>
-
-
         </div>
+
         <div className='flex-1'>
-          <div className='flex justify-between text-base sm:text-2x1 mb-4'>
+          <div className='flex justify-between text-base sm:text-2xl mb-4'>
             <Title text1={'ALL'} text2={' COLLECTIONS'} />
           </div>
+          {imageError && <p className="text-red-500">{imageError}</p>} {/* Display image error message */}
           <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 gap-y-4'>
-
             {filteredProperties.length > 0 ? (
               filteredProperties.map((property) => (
                 <Card
@@ -128,6 +125,7 @@ const Propertie = () => {
                   title={property.title}
                   price={property.price}
                   location={property.location}
+                  image={property.image || ''} // Pass the image or empty string if null
                   showDeleteButton={false} // Show delete button
                   onDelete={() => {}} // Pass a no-op function
                 />
@@ -135,16 +133,11 @@ const Propertie = () => {
             ) : (
               <p>Loading properties...</p>
             )}
-
           </div>
         </div>
-
-
-
-
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Propertie
+export default Propertie;

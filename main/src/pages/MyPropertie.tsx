@@ -14,6 +14,7 @@ function MyPropertie() {
         description: string;
         price: any;
         location: string;
+        image: string | null; // Allow image to be null initially
     }
 
     const [properties, setProperties] = useState<Property[]>([]);
@@ -98,6 +99,7 @@ function MyPropertie() {
                                     title={property.title}
                                     price={property.price}
                                     location={property.location}
+                                    image={property.image || ''} // Pass the image or empty string if null
                                     showDeleteButton={true}
                                     onDelete={handleDeleteProperty}
                                 />

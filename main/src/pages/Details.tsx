@@ -16,6 +16,7 @@ interface Property {
   bathrooms: number;
   owner: string;
   interestedClients: string[];
+  image?: string; // Add image property to hold the base64 image
 }
 
 const Details: React.FC = () => {
@@ -104,11 +105,19 @@ const Details: React.FC = () => {
       <div className="md:flex md:space-x-8">
         {/* Property Image */}
         <div className="w-full md:w-1/2 mb-8 md:mb-0">
-          <img
-            className="w-full h-72 rounded-lg shadow-lg object-cover transition-transform duration-300 hover:scale-105"
-            src={Image}
-            alt={property.title}
-          />
+          {property.image ? (
+            <img
+              className="w-full h-72 rounded-lg shadow-lg object-cover transition-transform duration-300 hover:scale-105"
+              src={property.image} // Use the base64 image from the property object
+              alt={property.title}
+            />
+          ) : (
+            <img
+              className="w-full h-72 rounded-lg shadow-lg object-cover transition-transform duration-300 hover:scale-105"
+              src={Image} // Fallback to default image if no base64 image is available
+              alt={property.title}
+            />
+          )}
         </div>
 
         {/* Property Details */}
@@ -170,7 +179,7 @@ const Details: React.FC = () => {
                     ))}
                   </ul>
                 ) : (
-                  <p className="text-gray-600">No clients have shown interest yet.</p>
+                  <p className="text-gray-500">No clients have expressed interest yet.</p>
                 )}
               </>
             )}

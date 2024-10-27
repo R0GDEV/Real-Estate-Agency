@@ -7,7 +7,7 @@ export const propertiesData = [
     location: 'Los Angeles',
     bedrooms: 4,
     bathrooms: 3,
-    image:"https://github.com/user-attachments/assets/acfc0d52-7aa2-412c-ad71-3b80915e17c0",
+    image:"",
     owner: 'owner1@example.com',
     interestedClients: [], // Empty array for interested clients
   },

@@ -19,6 +19,8 @@ import MapComponent from './pages/MapComponent'
 function App() {
   return (
     
+
+    
       <div className="pt-16 ">
         <Navbar />
         <Routes>

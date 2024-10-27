@@ -1,9 +1,10 @@
+import Logo from "../assets/Logo.png";
 const Footer = () => {
     return (
       <div className="bg-gradient-to-r from-gray-800 via-gray-900 to-black px-4 py-10 mt-10">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 text-sm text-white">
           <div className="flex flex-col">
-            <img src="" className="mb-5 w-32" alt="Logo" />
+            <img src={Logo} className="mb-5 w-32  " alt="Logo" />
             <p className="w-full md:w-2/3 text-gray-300">
               Your dream home awaits! At XYZ Real Estate, we specialize in providing top-notch properties that fit your lifestyle. With years of experience in the industry, we are dedicated to helping you find the perfect place to call home.
             </p>

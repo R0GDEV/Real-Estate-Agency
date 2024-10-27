@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
-import Logo from "../assets/Logo.png";
+import Logo from "../assets/favicon.ico";
 import Profile_icon from "../assets/profile_icon.svg";
 import Menu_icon from "../assets/Menu_icon.svg";
 import Info_icon from "../assets/info_icon.svg"; // Import your info icon

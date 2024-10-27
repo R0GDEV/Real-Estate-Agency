@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import React from 'react';
 
 // You can use a default placeholder image here for when the actual image is not available
-import DefaultImage from '../assets/B1.jpg';
+import DefaultImage from '../assets/interior.webp';
 
 interface CardProps {
   id: string;

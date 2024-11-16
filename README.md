@@ -5,6 +5,9 @@ This **Real Estate Platform** simplifies property management for agents and enha
 
 ---
 
+<div style="text-align:center;margin:auto;"> ![image](https://github.com/user-attachments/assets/a913e87d-b058-46e5-9989-aa1766c056b6)
+</div>
+
 ## 📸 Screenshots
 
 ### Home Page
@@ -24,11 +27,12 @@ The login page allows users to securely access the platform using their email an
 New users can register on the platform by filling in their details such as email, password, and role (Agent or Client). The form validates user input for a smooth registration process.
 
 ### Property Listings
-![Property Listings](https://via.placeholder.com/800x400)
+![Property Listings]![image](https://github.com/user-attachments/assets/6c80b77b-c9e5-44cb-898b-e907ef8f09bb)
 This page displays all the available properties. Clients can browse through property listings, and agents can manage their own properties. Filters and sorting options enhance the search experience.
 
 ### Property Details
-![Property Details]![image](https://github.com/user-attachments/assets/6c80b77b-c9e5-44cb-898b-e907ef8f09bb)
+![Property Details]![image](https://github.com/user-attachments/assets/febab7c4-d59f-4570-b563-176f4ce2ddf8)
+
 
 The property details page provides comprehensive information about each property, including price, location, bedrooms, and bathrooms. Clients can express interest by clicking the "Show Interest" button.
 

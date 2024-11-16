@@ -5,7 +5,7 @@ This **Real Estate Platform** simplifies property management for agents and enha
 
 ---
 
-<div style="text-align:center;margin:auto;"> ![image](https://github.com/user-attachments/assets/a913e87d-b058-46e5-9989-aa1766c056b6)
+<div style="text-align:center;margin:auto;"> <img src="https://github.com/user-attachments/assets/a913e87d-b058-46e5-9989-aa1766c056b6">
 </div>
 
 ## 📸 Screenshots

@@ -12,25 +12,29 @@ const Navbar = () => {
         return localStorage.getItem("modalShown") ? false : true;
     });
     const navigate = useNavigate();
-    const location = useLocation(); 
+    const location = useLocation();
     const [role, setRole] = useState<string | null>(null);
+    const [token, setToken] = useState<string | null>(null);
 
     useEffect(() => {
         const storedRole = localStorage.getItem("role");
-        if (storedRole) {
-            setRole(storedRole);
-        }
+        const storedToken = localStorage.getItem("token");
+        if (storedRole) setRole(storedRole);
+        if (storedToken) setToken(storedToken);
     }, []);
 
     const handleLogout = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("role");
+        setToken(null);
         navigate("/login");
     };
 
     const toggleModal = () => {
-        setIsInfoModalOpen(false);
-        localStorage.setItem("modalShown", "true");
+        setIsInfoModalOpen(!isInfoModalOpen);
+        if (!localStorage.getItem("modalShown")) {
+            localStorage.setItem("modalShown", "true");
+        }
     };
 
     return (
@@ -64,15 +68,23 @@ const Navbar = () => {
 
                 {/* Profile & Menu Icons */}
                 <div className="flex gap-6 items-center">
+                    {/* Info Button */}
                     <img src={Info_icon} alt="Info" onClick={toggleModal} className="cursor-pointer w-8 h-8 hover:scale-105 transition-all duration-300" />
 
+                    {/* Profile Dropdown */}
                     <div className="group relative">
                         <img src={Profile_icon} className="cursor-pointer w-8 h-8" alt="Profile" />
                         <div className="group-hover:block hidden absolute right-0 pt-2 z-20">
                             <div className="flex flex-col items-center gap-2 w-40 py-3 px-5 bg-white shadow-md rounded-lg text-gray-700">
-                                <Link to="/myinterest" className="hover:text-black">My Interested</Link>
-                                {role === "agent" && <Link to="/myproperties" className="hover:text-black">My Properties</Link>}
-                                <button onClick={handleLogout} className="hover:text-black">Logout</button>
+                                {token ? (
+                                    <>
+                                        <Link to="/myinterest" className="hover:text-black">My Interested</Link>
+                                        {role === "agent" && <Link to="/myproperties" className="hover:text-black">My Properties</Link>}
+                                        <button onClick={handleLogout} className="hover:text-black">Logout</button>
+                                    </>
+                                ) : (
+                                    <Link to="/login" className="hover:text-black">Login</Link>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -107,7 +119,7 @@ const Navbar = () => {
                             <li>Node.js - Backend</li>
                             <li>Express - API Management</li>
                             <li>MongoDB - NoSQL Database</li>
-                            <li>JWT (JSON Web Token) - Authentication & Authorization</li>
+                            <li>JWT - Authentication & Authorization</li>
                             <li>Axios - API Handling</li>
                             <li>Tailwind CSS - Styling</li>
                         </ul>

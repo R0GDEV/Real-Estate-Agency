@@ -83,15 +83,15 @@ const Home = () => {
           </p>
           <div className="flex justify-center">
             <div className="w-1/3 p-4">
-              <h3 className="text-xl font-bold">$100,000 - $200,000</h3>
+              <h3 className="text-xl font-bold">100,000 - 200,000</h3>
               <p className="mt-2">Ideal for first-time buyers and small families. Great locations at affordable prices.</p>
             </div>
             <div className="w-1/3 p-4">
-              <h3 className="text-xl font-bold">$200,000 - $500,000</h3>
+              <h3 className="text-xl font-bold">200,000 - 500,000</h3>
               <p className="mt-2">Luxury homes at unbeatable prices. Perfect for those seeking high-end properties.</p>
             </div>
             <div className="w-1/3 p-4">
-              <h3 className="text-xl font-bold">$500,000+</h3>
+              <h3 className="text-xl font-bold"> 500,000+</h3>
               <p className="mt-2">Premium properties for those looking for the best of the best in exclusive locations.</p>
             </div>
           </div>
